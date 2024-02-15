@@ -365,7 +365,9 @@ func Configure(p *config.Provider) {
 			Type:      "PrivateDNSZone",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		delete(r.References, "private_service_connection.private_connection_resource_id")
+		r.References["private_service_connection.private_connection_resource_id"] = config.Reference{
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
